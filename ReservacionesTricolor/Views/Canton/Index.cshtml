@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ReservacionesTricolor.Canton>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreCanton)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais.NombrePais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Provincia.NombreProvincia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreCanton)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pais.NombrePais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdCanton }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCanton }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdCanton })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Reservaciones Tricolor", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Mantenimiento <span class="glyphicon  glyphicon glyphicon-plus" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Hotel", "Index", "Hotel")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Habitación", "Index", "Habitacion")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Características", "Index", "Caracteristica")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Usuario", "Index", "Usuario")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Roles", "Index", "Rol")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Asignar roles", "Index", "UsuarioRol")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("País", "Index", "Pais")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Provincia", "Index", "Provincia")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Cantón", "Index", "Canton")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Procesos   <span class="glyphicon  glyphicon-cog" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Depreciación", "ListActivos", "Depreciacion")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reportes <span class="glyphicon  glyphicon glyphicon-print" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listado de Activos", "ActivosCatalogo", "Reporte")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Consulta de Activo", "x", "x")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Vencimiento de Garantías", "ListActivos", "Reporte")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Tipo de Activos", "x", "x")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Cálculo de Depreciación ", "x", "x")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Información cualitativa y cuantitativa ", "x", "x")</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav ">
+                    <li>
+                        <a href="@Url.Action("Calificacion", "Home")">
+                            Calificación
+                            <span class="glyphicon  glyphicon-book" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ">
+                    <li>
+                        <a href="@Url.Action("Logout", "Login")">
+                            Logout
+                            <span class="glyphicon   glyphicon-log-out" aria-hidden="true"></span>
+                        </a>
+
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @*@{
+                    string nombre = "";
+                    Infrastructure.Models.Usuario oUsuario;
+                    // Validar si vienen datos en la session
+                    if (Session["User"] != null)
+                    {
+                        // Casting
+                        oUsuario = Session["User"] as Infrastructure.Models.Usuario;
+
+                        if (oUsuario != null)
+                        {
+                            nombre = $"{oUsuario.Nombre} {oUsuario.Apellidos}";
+                        }
+                    }
+
+
+                }*@
+
+                        <a href="#">
+                            @*Usuario: @nombre*@
+                            <span class="glyphicon  glyphicon-user " aria-hidden="true"></span>
+                        </a>
+
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

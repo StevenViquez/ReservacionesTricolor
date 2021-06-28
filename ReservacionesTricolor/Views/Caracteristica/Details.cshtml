@@ -1,0 +1,26 @@
+﻿@model ReservacionesTricolor.Caracteristica
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Caracteristica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCaracteristica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCaracteristica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCaracteristica }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

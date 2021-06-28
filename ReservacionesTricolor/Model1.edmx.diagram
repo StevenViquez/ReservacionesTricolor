@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="493a1303cca6417c8410d90b536fccdb" Name="Diagram1">
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Canton" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Caracteristica" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.CaracteristicaHabitacion" Width="1.5" PointX="12" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Factura" Width="1.5" PointX="17.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Habitacion" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Hotel" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Pais" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Provincia" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Reservacion" Width="1.5" PointX="15" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Rol" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.Usuario" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReservacionesTricolorModel.UsuarioRol" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_CANTON_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_PAIS_CANTON" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_PROVINCIA" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_CARACTERISTICA_CARACTERISTICA" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_HABITACION_CARACTERISTICA" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_RESERVACION" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_HABITACION_RESERVACION" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_PAIS_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_PROVINCIA_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_USUARIO_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_PAIS" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_USUARIO_RESERVACION" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_ROL" ManuallyRouted="false" />
+        <AssociationConnector Association="ReservacionesTricolorModel.FK_USUARIO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
