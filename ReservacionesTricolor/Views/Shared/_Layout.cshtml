@@ -4,136 +4,71 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Reservaciones Tricolor", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Mantenimiento <span class="glyphicon  glyphicon glyphicon-plus" />
-                            <span class="caret"></span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Home/Index/">Reservaciones Tricolor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mantenimiento
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Hotel", "Index", "Hotel")</li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>@Html.ActionLink("Hotel", "Index", "Hotel", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Habitación", "Index", "Habitacion")</li>
+                            <li>@Html.ActionLink("Habitación", "Index", "Habitacion", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Características", "Index", "Caracteristica")</li>
+                            <li>@Html.ActionLink("Características", "Index", "Caracteristica", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Usuario", "Index", "Usuario")</li>
+                            <li>@Html.ActionLink("Usuario", "Index", "Usuario", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Roles", "Index", "Rol")</li>
+                            <li>@Html.ActionLink("Roles", "Index", "Rol", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Asignar roles", "Index", "UsuarioRol")</li>
+                            <li>@Html.ActionLink("Asignar roles", "Index", "UsuarioRol", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("País", "Index", "Pais")</li>
+                            <li>@Html.ActionLink("País", "Index", "Pais", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Provincia", "Index", "Provincia")</li>
+                            <li>@Html.ActionLink("Provincia", "Index", "Provincia", null, new { @class = "dropdown-item" })</li>
                             <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Cantón", "Index", "Canton")</li>
+                            <li>@Html.ActionLink("Cantón", "Index", "Canton", null, new { @class = "dropdown-item" })</li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Procesos   <span class="glyphicon  glyphicon-cog" />
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Depreciación", "ListActivos", "Depreciacion")</li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Reportes <span class="glyphicon  glyphicon glyphicon-print" />
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Listado de Activos", "ActivosCatalogo", "Reporte")</li>
-                            <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Consulta de Activo", "x", "x")</li>
-                            <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Vencimiento de Garantías", "ListActivos", "Reporte")</li>
-                            <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Tipo de Activos", "x", "x")</li>
-                            <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Cálculo de Depreciación ", "x", "x")</li>
-                            <li class="nav-divider"></li>
-                            <li>@Html.ActionLink("Información cualitativa y cuantitativa ", "x", "x")</li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>                    
                 </ul>
-
-                <ul class="nav navbar-nav ">
-                    <li>
-                        <a href="@Url.Action("Calificacion", "Home")">
-                            Calificación
-                            <span class="glyphicon  glyphicon-book" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav ">
-                    <li>
-                        <a href="@Url.Action("Logout", "Login")">
-                            Logout
-                            <span class="glyphicon   glyphicon-log-out" aria-hidden="true"></span>
-                        </a>
-
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @*@{
-                    string nombre = "";
-                    Infrastructure.Models.Usuario oUsuario;
-                    // Validar si vienen datos en la session
-                    if (Session["User"] != null)
-                    {
-                        // Casting
-                        oUsuario = Session["User"] as Infrastructure.Models.Usuario;
-
-                        if (oUsuario != null)
-                        {
-                            nombre = $"{oUsuario.Nombre} {oUsuario.Apellidos}";
-                        }
-                    }
-
-
-                }*@
-
-                        <a href="#">
-                            @*Usuario: @nombre*@
-                            <span class="glyphicon  glyphicon-user " aria-hidden="true"></span>
-                        </a>
-
-
-                    </li>
-                </ul>
-
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; ReservacionesTricolor</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

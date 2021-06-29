@@ -22,7 +22,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Habitacion/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(habitacion);
+            return PartialView(habitacion);
         }
 
         // GET: Habitacion/Create
@@ -111,13 +111,12 @@ namespace ReservacionesTricolor.Controllers
 
         // POST: Habitacion/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Habitacion habitacion = db.Habitacion.Find(id);
             db.Habitacion.Remove(habitacion);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });
         }
 
         protected override void Dispose(bool disposing)

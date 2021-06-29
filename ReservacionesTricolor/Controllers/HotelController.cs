@@ -22,7 +22,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Hotel/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(hotel);
+            return PartialView(hotel);
         }
 
         // GET: Hotel/Create
@@ -106,30 +106,16 @@ namespace ReservacionesTricolor.Controllers
             return View(hotel);
         }
 
-        // GET: Hotel/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Hotel hotel = db.Hotel.Find(id);
-            if (hotel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hotel);
-        }
+        
 
         // POST: Hotel/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             Hotel hotel = db.Hotel.Find(id);
             db.Hotel.Remove(hotel);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message="ok", JsonRequestBehavior.AllowGet});
         }
 
         protected override void Dispose(bool disposing)
