@@ -21,7 +21,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Pais/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -32,7 +32,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(pais);
+            return PartialView(pais);
         }
 
         // GET: Pais/Create
@@ -106,13 +106,12 @@ namespace ReservacionesTricolor.Controllers
 
         // POST: Pais/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Pais pais = db.Pais.Find(id);
             db.Pais.Remove(pais);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });
         }
 
         protected override void Dispose(bool disposing)

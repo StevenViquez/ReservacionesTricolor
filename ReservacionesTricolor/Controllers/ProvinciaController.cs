@@ -22,7 +22,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Provincia/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(provincia);
+            return PartialView(provincia);
         }
 
         // GET: Provincia/Create
@@ -111,13 +111,12 @@ namespace ReservacionesTricolor.Controllers
 
         // POST: Provincia/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Provincia provincia = db.Provincia.Find(id);
             db.Provincia.Remove(provincia);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });
         }
 
         protected override void Dispose(bool disposing)

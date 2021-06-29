@@ -296,6 +296,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SQL BD\ReservacionesTricolor.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -372,6 +373,12 @@
     <Content Include="Views\Factura\Index.cshtml" />
     <Content Include="Views\Hotel\_Info.cshtml" />
     <Content Include="Views\Habitacion\_Info.cshtml" />
+    <Content Include="Views\Caracteristica\_Info.cshtml" />
+    <Content Include="Views\Usuario\_Info.cshtml" />
+    <Content Include="Views\Rol\_Info.cshtml" />
+    <Content Include="Views\Pais\_Info.cshtml" />
+    <Content Include="Views\Provincia\_Info.cshtml" />
+    <Content Include="Views\Canton\_Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

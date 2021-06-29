@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<ReservacionesTricolor.Rol>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rol";
 }
 
-<h2>Index</h2>
+<h2>Roles</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a class="btn btn-success" href="/@ViewBag.Title/Create">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -17,17 +19,95 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreRol)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdRol }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdRol }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdRol })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr id="linea-@item.IdRol">
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreRol)
+            </td>
+            <td>
+                <a class="btn btn-success" href="/@ViewBag.Title/Edit?id=@item.IdRol">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+
+                <a class="btn btn-warning" onclick="Info(@item.IdRol)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                </a>
+
+                <a class="btn btn-danger" onclick="Eliminar(@item.IdRol)" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<!-- Detail Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div style="background-color:#97BBB5; color:white;" class="modal-header">
+                <h5 class="modal-title" id="infoModalLabel">Detalle de @ViewBag.Title</h5>
+            </div>
+            <div class="modal-body" id="divInfo">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button style="background-color:darkred; color:white;" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div style="background-color:#97BBB5; color:white;" class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Eliminar @ViewBag.Title</h5>
+            </div>
+            <div class="modal-body">
+                <div id="idEliminar" hidden="hidden"></div>
+                ¿Desea eliminar el @ViewBag.Title seleccionada?
+            </div>
+            <div class="modal-footer">
+                <button style="background-color:darkseagreen; color:white;" type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                <button style="background-color:darkred; color:white;" onclick="EliminarAceptar()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function Eliminar(id) {
+        $("#idEliminar").html(id);
+    }
+
+    function EliminarAceptar() {
+        var id = $("#idEliminar").html();
+
+        $.ajax({
+            type: "POST",
+            url: "/@ViewBag.Title/Delete?id=" + id,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            error: function (response) {
+                console.log(response)
+            },
+            success: function (response) {
+                console.log(response)
+                if (response.Message == "ok") {
+                    $("#linea-" + id).hide("slow");
+                }
+            }
+        });
+    }
+
+    function Info(id) {
+        $("#divInfo").load("/@ViewBag.Title/_Info?id=" + id)
+    }
+
+</script>

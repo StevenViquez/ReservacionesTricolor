@@ -21,7 +21,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Rol/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -32,7 +32,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(rol);
+            return PartialView(rol);
         }
 
         // GET: Rol/Create
@@ -106,13 +106,12 @@ namespace ReservacionesTricolor.Controllers
 
         // POST: Rol/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Rol rol = db.Rol.Find(id);
             db.Rol.Remove(rol);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });
         }
 
         protected override void Dispose(bool disposing)

@@ -22,7 +22,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Canton/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(canton);
+            return PartialView(canton);
         }
 
         // GET: Canton/Create
@@ -115,13 +115,12 @@ namespace ReservacionesTricolor.Controllers
 
         // POST: Canton/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Canton canton = db.Canton.Find(id);
             db.Canton.Remove(canton);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });
         }
 
         protected override void Dispose(bool disposing)

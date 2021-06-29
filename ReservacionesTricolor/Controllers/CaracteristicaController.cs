@@ -21,7 +21,7 @@ namespace ReservacionesTricolor.Controllers
         }
 
         // GET: Caracteristica/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult _Info(int? id)
         {
             if (id == null)
             {
@@ -32,7 +32,7 @@ namespace ReservacionesTricolor.Controllers
             {
                 return HttpNotFound();
             }
-            return View(caracteristica);
+            return PartialView(caracteristica);
         }
 
         // GET: Caracteristica/Create
@@ -106,13 +106,12 @@ namespace ReservacionesTricolor.Controllers
 
         // POST: Caracteristica/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Caracteristica caracteristica = db.Caracteristica.Find(id);
             db.Caracteristica.Remove(caracteristica);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });
         }
 
         protected override void Dispose(bool disposing)
