@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ReservacionesTricolor;
+using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
@@ -15,6 +16,9 @@ namespace ReservacionesTricolor.Controllers
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
 
         // GET: Rol
+        public enum Roles { Administrador = 2 }
+        [CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
             return View(db.Rol.ToList());

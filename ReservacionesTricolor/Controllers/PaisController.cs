@@ -7,19 +7,27 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ReservacionesTricolor;
+using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
+    
     public class PaisController : Controller
     {
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
 
         // GET: Pais
+
+        
+        public enum Roles { Administrador = 2}
+        [CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
             return View(db.Pais.ToList());
         }
 
+        
         // GET: Pais/Details/5
         public ActionResult _Info(int? id)
         {

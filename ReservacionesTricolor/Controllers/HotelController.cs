@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ReservacionesTricolor;
+using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
@@ -15,6 +16,9 @@ namespace ReservacionesTricolor.Controllers
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
 
         // GET: Hotel
+        public enum Roles { Administrador = 2 }
+        [CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
             var hotel = db.Hotel.Include(h => h.Canton).Include(h => h.Pais).Include(h => h.Provincia).Include(h => h.Usuario);
