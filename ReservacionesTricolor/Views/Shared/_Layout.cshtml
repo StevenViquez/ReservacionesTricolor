@@ -9,6 +9,7 @@
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/principal.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -21,63 +22,77 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     @{
-                                    Usuario oUsuario;
-                                    string nombre = "";
-                                    // Validar si vienen datos en la session
-                                    if (Session["User"] != null)
-                                    {
-                                        // Casting
-                                        oUsuario = Session["User"] as Usuario;
+                        Usuario oUsuario;
+                        string nombre = "";
+                        // Validar si vienen datos en la session
+                        if (Session["User"] != null)
+                        {
+                            // Casting
+                            oUsuario = Session["User"] as Usuario;
 
-                                        var test = oUsuario.UsuarioRol.Where(x => x.Rol.NombreRol == "Administrador");
+                            var usuarioAdmin = oUsuario.UsuarioRol.Where(x => x.Rol.NombreRol == "Administrador").FirstOrDefault();
 
-                                        if (oUsuario.UsuarioRol.Where(x => x.Rol.NombreRol == "Administrador").Count() > 0)
-                                        {
-                                           <li class="nav-item dropdown">
-                                               <a style="color:white; font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Mantenimiento
-                                               </a>
-                                               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                   <li>@Html.ActionLink("Hotel", "Index", "Hotel", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Habitación", "Index", "Habitacion", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Características", "Index", "Caracteristica", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Usuario", "Index", "Usuario", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Roles", "Index", "Rol", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Asignar roles", "Index", "UsuarioRol", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("País", "Index", "Pais", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Provincia", "Index", "Provincia", null, new { @class = "dropdown-item" })</li>
-                                                   <li class="nav-divider"></li>
-                                                   <li>@Html.ActionLink("Cantón", "Index", "Canton", null, new { @class = "dropdown-item" })</li>
-                                               </ul>
-                                           </li>
-                                           <li class="nav-item dropdown">
-                                               <a style="color:white; font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Consultas
-                                               </a>
-                                               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                   <li>@Html.ActionLink("Reservaciones", "Index", "Hotel", null, new { @class = "dropdown-item" })</li>
-                                               </ul>
-                                           </li>
-                                        }
-                                          <li class="nav-item">
-                                              <a style="color:white; font-size: 20px;" class="nav-link" href="#">Ver mis reservaciones</a>
-                                          </li>
-                                          <li class="nav-item">
-                                              <a style="color:white; font-size: 20px;" class="nav-link" href="#">Ver hoteles</a>
-                                          </li>
+                            if (usuarioAdmin != null)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a style="color:white; font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Mantenimiento
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li>@Html.ActionLink("Hotel", "Index", "Hotel", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Habitación", "Index", "Habitacion", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Características", "Index", "Caracteristica", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Usuario", "Index", "Usuario", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Roles", "Index", "Rol", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Asignar roles", "Index", "UsuarioRol", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("País", "Index", "Pais", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Provincia", "Index", "Provincia", null, new { @class = "dropdown-item" })</li>
+                                        <li class="nav-divider"></li>
+                                        <li>@Html.ActionLink("Cantón", "Index", "Canton", null, new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a style="color:white; font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Consultas
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li>@Html.ActionLink("Reservaciones", "Index", "Hotel", null, new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a style="color:white; font-size: 20px;" class="nav-link" href="#">Ver mis reservaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="color:white; font-size: 20px;" class="nav-link" href="#">Ver hoteles</a>
+                            </li>
 
-                                    }
+                        }
                         //Here I must implement login and logout button
                     }
                 </ul>
             </div>
+
+            @{
+                // Validar si vienen datos en la session
+                if (Session["User"] != null)
+                {
+                    <a href="@Url.Action("Logout", "Login")" type="submit" class="btn btn-warning">Log Out</a>
+                }
+                else
+                {
+                    <a style="margin-right:2%;" href="/Login/Register" type="submit" class="btn btn-warning">Registrarse</a>
+                    <a href="/Login" type="submit" class="btn btn-warning">Log In</a>
+                }
+            }
+
         </div>
     </nav>
     <div class="container body-content">

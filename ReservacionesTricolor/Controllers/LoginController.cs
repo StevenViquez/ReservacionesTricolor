@@ -40,6 +40,43 @@ namespace ReservacionesTricolor.Controllers
                 return View("Index");
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Register(Usuario usuario)
+        {
+            Usuario oUsuario = usuario;            
+
+            if (ModelState.IsValid)
+            {
+                oUsuario = db.Usuario.Add(usuario);
+
+                if (oUsuario != null)
+                {
+                    UsuarioRol oUsuarioRol = new UsuarioRol
+                    {
+                        IdUsuario = oUsuario.IdUsuario,
+                        IdRol = 3
+                    };
+                    oUsuario.UsuarioRol.Add(oUsuarioRol);                    
+                    db.SaveChanges();
+                    var returnUsuario = db.Usuario.Include("UsuarioRol").Where(x => x.IdUsuario == oUsuario.IdUsuario).FirstOrDefault();
+                    Session["User"] = returnUsuario;
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    TempData["Message"] = "Error al autenticarse";
+                }
+            }
+
+            return View("Index");
+        }
+
         public ActionResult UnAuthorized()
         {
             

@@ -113,6 +113,12 @@ namespace ReservacionesTricolor.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Usuario usuario = db.Usuario.Find(id);
+            var oUsuarioRol = db.UsuarioRol.Where(x => x.IdUsuario == id).ToList();
+            foreach (var item in oUsuarioRol)
+            {
+                db.UsuarioRol.Remove(item);
+            }
+
             db.Usuario.Remove(usuario);
             db.SaveChanges();
             return Json(new { Message = "ok", JsonRequestBehavior.AllowGet });

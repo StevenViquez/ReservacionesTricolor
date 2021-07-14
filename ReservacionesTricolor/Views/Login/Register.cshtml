@@ -1,17 +1,16 @@
 ﻿@model ReservacionesTricolor.Usuario
 
 @{
-    ViewBag.Title = "Agregar";
+    ViewBag.Title = "Registrarse";
 }
 
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Register","Login")) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Agregar Usuario</h4>
+        <h4>Registrarse</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -57,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "form-control", type = "password" } })
                 @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,7 +72,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
