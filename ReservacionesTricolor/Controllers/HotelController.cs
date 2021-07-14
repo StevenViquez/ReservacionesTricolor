@@ -43,9 +43,16 @@ namespace ReservacionesTricolor.Controllers
         // GET: Hotel/Create
         public ActionResult Create()
         {
-            ViewBag.IdCanton = new SelectList(db.Canton, "IdCanton", "NombreCanton");
-            ViewBag.IdPais = new SelectList(db.Pais, "IdPais", "NombrePais");
-            ViewBag.IdProvincia = new SelectList(db.Provincia, "IdProvincia", "NombreProvincia");
+            var pais = db.Pais.ToList();
+            List<SelectListItem> li = new List<SelectListItem>();
+            li.Add(new SelectListItem { Text = "--Seleccione Pais--", Value = "0" });
+            foreach (var m in pais)
+            {
+                li.Add(new SelectListItem { Text = m.NombrePais, Value = m.IdPais.ToString() });
+            }
+
+
+            ViewBag.IdPais = li;
             ViewBag.IdAdministrador = new SelectList(db.Usuario, "IdUsuario", "Nombre");
             return View();
         }

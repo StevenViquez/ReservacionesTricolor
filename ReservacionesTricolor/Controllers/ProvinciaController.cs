@@ -43,7 +43,16 @@ namespace ReservacionesTricolor.Controllers
         // GET: Provincia/Create
         public ActionResult Create()
         {
-            ViewBag.IdPais = new SelectList(db.Pais, "IdPais", "NombrePais");
+            var pais = db.Pais.ToList();
+            List<SelectListItem> li = new List<SelectListItem>();
+            li.Add(new SelectListItem { Text = "--Seleccione Pais--", Value = "0" });
+            foreach (var m in pais)
+            {
+                li.Add(new SelectListItem { Text = m.NombrePais, Value = m.IdPais.ToString() });
+            }
+
+
+            ViewBag.IdPais = li;
             return View();
         }
 
@@ -130,6 +139,22 @@ namespace ReservacionesTricolor.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult ObtenerProvincia(int id)
+        {
+            var provincia = db.Provincia.Where(x => x.IdPais == id).ToList();
+            List<SelectListItem> listaProvincia = new List<SelectListItem>();
+
+            listaProvincia.Add(new SelectListItem { Text = "--Seleccione Provincia--", Value = "0" });
+            if (provincia != null)
+            {
+                foreach (var x in provincia)
+                {
+                    listaProvincia.Add(new SelectListItem { Text = x.NombreProvincia, Value = x.IdProvincia.ToString() });
+                }
+            }
+            return Json(new SelectList(listaProvincia, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
     }
 }

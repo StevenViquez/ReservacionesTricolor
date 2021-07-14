@@ -43,8 +43,17 @@ namespace ReservacionesTricolor.Controllers
         // GET: Canton/Create
         public ActionResult Create()
         {
-            ViewBag.IdPais = new SelectList(db.Pais, "IdPais", "NombrePais");
-            ViewBag.IdProvincia = new SelectList(db.Provincia, "IdProvincia", "NombreProvincia");
+            var pais = db.Pais.ToList();
+            List<SelectListItem> li = new List<SelectListItem>();
+            li.Add(new SelectListItem { Text = "--Seleccione Pais--", Value = "0" });
+            foreach (var m in pais)
+            {
+                li.Add(new SelectListItem { Text = m.NombrePais, Value = m.IdPais.ToString() });
+            }
+
+
+            ViewBag.IdPais = li;
+            ViewBag.IdProvincia =new SelectListItem { Text = "--Seleccione Provincia--", Value = "0" };
             return View();
         }
 
@@ -134,6 +143,22 @@ namespace ReservacionesTricolor.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        
+        public JsonResult ObtenerCanton(int id)
+        {
+            var canton = db.Canton.Where(x => x.IdProvincia == id).ToList();
+            List<SelectListItem> listaCanton = new List<SelectListItem>();
+
+            listaCanton.Add(new SelectListItem { Text = "--Seleccione Canton--", Value = "0" });
+            if (canton != null)
+            {
+                foreach (var x in canton)
+                {
+                    listaCanton.Add(new SelectListItem { Text = x.NombreCanton, Value = x.IdCanton.ToString() });
+                }
+            }
+            return Json(new SelectList(listaCanton, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
     }
 }
