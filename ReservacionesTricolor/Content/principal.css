@@ -12,12 +12,16 @@
     color: white !important;
     background-color: #FF8C00;
     font-weight: bold;
-    width: 15%;
+    width: 40%;
 }
 
+.button_position {
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 25%;
+}
 
 .form-group {
-    text-align: left;
     margin-top: 3%;
 }
 

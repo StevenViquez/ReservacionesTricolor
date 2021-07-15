@@ -11,7 +11,9 @@ namespace ReservacionesTricolor
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Habitacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,12 +22,28 @@ namespace ReservacionesTricolor
             this.CaracteristicaHabitacion = new HashSet<CaracteristicaHabitacion>();
             this.Reservacion = new HashSet<Reservacion>();
         }
-    
+
+        [DisplayName("Habitación")]
         public int IdHabitacion { get; set; }
+
+        [Required]
+        [DisplayName("Nombre de Habitación")]
         public string NombreHabitacion { get; set; }
+
+        [Required]
+        [DisplayName("Descripción")]
         public string Descripcion { get; set; }
+
+        [Required]
+        [DisplayName("Precio")]
         public decimal Precio { get; set; }
+
+        [Required]
+        [DisplayName("Capacidad")]
         public int Capacidad { get; set; }
+
+        [Required]
+        [DisplayName("Hotel")]
         public int IdHotel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

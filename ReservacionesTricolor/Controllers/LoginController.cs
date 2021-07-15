@@ -57,20 +57,24 @@ namespace ReservacionesTricolor.Controllers
 
                 if (oUsuario != null)
                 {
+                    
+                                    
+                    db.SaveChanges();
                     UsuarioRol oUsuarioRol = new UsuarioRol
                     {
                         IdUsuario = oUsuario.IdUsuario,
                         IdRol = 3
                     };
-                    oUsuario.UsuarioRol.Add(oUsuarioRol);                    
+                    oUsuario.UsuarioRol.Add(oUsuarioRol);
                     db.SaveChanges();
-                    var returnUsuario = db.Usuario.Include("UsuarioRol").Where(x => x.IdUsuario == oUsuario.IdUsuario).FirstOrDefault();
+
+                    var returnUsuario = db.Usuario.Include("UsuarioRol.Rol").Where(x => x.IdUsuario == oUsuario.IdUsuario).FirstOrDefault();
                     Session["User"] = returnUsuario;
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    TempData["Message"] = "Error al autenticarse";
+                    TempData["Message"] = "Error al Registrarse";
                 }
             }
 

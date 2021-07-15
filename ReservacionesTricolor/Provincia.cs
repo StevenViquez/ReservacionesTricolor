@@ -11,7 +11,9 @@ namespace ReservacionesTricolor
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Provincia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +22,16 @@ namespace ReservacionesTricolor
             this.Canton = new HashSet<Canton>();
             this.Hotel = new HashSet<Hotel>();
         }
-    
+
+        [DisplayName("Provincia")]
         public int IdProvincia { get; set; }
+
+        [Required]
+        [DisplayName("Nombre Provincia")]
         public string NombreProvincia { get; set; }
+
+        [Required]
+        [DisplayName("País")]
         public int IdPais { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

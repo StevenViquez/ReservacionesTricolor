@@ -11,13 +11,28 @@ namespace ReservacionesTricolor
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Factura
     {
+        [DisplayName("Id Factura")]
         public int IdFactura { get; set; }
+
+        [Required]
+        [DisplayName("Subtotal")]
         public int SubTotal { get; set; }
+
+        [Required]
+        [DisplayName("IVA")]
         public System.DateTime IVA { get; set; }
+
+        [Required]
+        [DisplayName("Total")]
         public System.DateTime Total { get; set; }
+
+        [Required]
+        [DisplayName("Reservación")]
         public int IdReservacion { get; set; }
     
         public virtual Reservacion Reservacion { get; set; }

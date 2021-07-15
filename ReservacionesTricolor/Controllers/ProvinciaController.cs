@@ -141,6 +141,7 @@ namespace ReservacionesTricolor.Controllers
             base.Dispose(disposing);
         }
 
+        //https://www.c-sharpcorner.com/blogs/cascading-dropdownlist-in-asp-net-mvc
         public JsonResult ObtenerProvincia(int id)
         {
             var provincia = db.Provincia.Where(x => x.IdPais == id).ToList();

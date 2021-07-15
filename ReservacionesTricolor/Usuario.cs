@@ -11,7 +11,9 @@ namespace ReservacionesTricolor
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,13 +23,32 @@ namespace ReservacionesTricolor
             this.Reservacion = new HashSet<Reservacion>();
             this.UsuarioRol = new HashSet<UsuarioRol>();
         }
-    
+
+        [DisplayName("Usuario")]
         public int IdUsuario { get; set; }
+
+     
+        [DisplayName("Nombre")]
         public string Nombre { get; set; }
+
+       
+        [DisplayName("Primer apellido")]
         public string PrimerApellido { get; set; }
+
+      
+        [DisplayName("Segundo apellido")]
         public string SegundoApellido { get; set; }
+
+       
+        [DisplayName("Email")]
         public string Email { get; set; }
+
+       
+        [DisplayName("Teléfono")]
         public string Telefono { get; set; }
+
+      
+        [DisplayName("Contraseña")]
         public string Contrasena { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

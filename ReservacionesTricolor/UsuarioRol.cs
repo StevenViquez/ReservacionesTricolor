@@ -11,11 +11,20 @@ namespace ReservacionesTricolor
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class UsuarioRol
     {
+        [DisplayName("Id")]
         public int Id { get; set; }
+
+        [Required]
+        [DisplayName("Rol")]
         public int IdRol { get; set; }
+
+        [Required]
+        [DisplayName("Usuario")]
         public int IdUsuario { get; set; }
     
         public virtual Rol Rol { get; set; }

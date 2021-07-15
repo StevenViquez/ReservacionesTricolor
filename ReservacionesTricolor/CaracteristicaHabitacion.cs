@@ -11,11 +11,21 @@ namespace ReservacionesTricolor
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CaracteristicaHabitacion
     {
+        
+        [DisplayName("Características de habitación")]
         public int Id { get; set; }
+
+        [Required]
+        [DisplayName("Habitación")]
         public int IdHabitacion { get; set; }
+
+        [Required]
+        [DisplayName("Características de habitación")]
         public int IdCaracteristica { get; set; }
     
         public virtual Caracteristica Caracteristica { get; set; }
