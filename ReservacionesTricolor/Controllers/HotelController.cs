@@ -137,5 +137,14 @@ namespace ReservacionesTricolor.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+        public ActionResult ReservarHabitacion()
+        {
+            var hotel = db.Hotel.Include(h => h.Canton).Include(h => h.Pais).Include(h => h.Provincia).Include(h => h.Usuario);
+            return View(hotel.ToList());
+        }
+
     }
 }
