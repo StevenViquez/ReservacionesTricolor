@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ReservacionesTricolor.Habitacion>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div class="card" style="width: 10rem; height: 100%;">
+                <img src="https://www.cataloniahotels.com/es/blog/wp-content/uploads/2016/05/habitaci%C3%B3n-doble-catalonia-620x412.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Habitación @Html.DisplayFor(modelItem => item.NombreHabitacion)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                    <div style="margin-bottom:20%;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Precio: @Html.DisplayFor(modelItem => item.Precio)</li>
+                            <li class="list-group-item">Capacidad: @Html.DisplayFor(modelItem => item.Capacidad)</li>                            
+                        </ul>
+                    </div>
+                    <div style="bottom: 1%;position:absolute;">
+                        <button type="button" class="btn btn-danger" onclick="Habitaciones(@item.IdHotel)">Reservar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

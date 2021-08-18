@@ -146,5 +146,19 @@ namespace ReservacionesTricolor.Controllers
             return View(hotel.ToList());
         }
 
+        public ActionResult _Habitaciones(int? id, DateTime checkin, DateTime checkout)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var habitaciones = db.Habitacion.Where(h => h.IdHotel == id).Include(h => h.Hotel);
+            if (habitaciones == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(habitaciones);
+        }
+
     }
 }
