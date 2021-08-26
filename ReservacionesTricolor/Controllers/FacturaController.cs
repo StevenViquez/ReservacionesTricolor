@@ -26,6 +26,13 @@ namespace ReservacionesTricolor.Controllers
             return View(factura.ToList());
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult MostrarReservaciones()
+        {
+            var factura = db.Factura.Include(f => f.Reservacion.Habitacion.Hotel);
+            return View(factura.ToList());
+        }
+
         // GET: Factura/Details/5
         public ActionResult Details(int? id)
         {

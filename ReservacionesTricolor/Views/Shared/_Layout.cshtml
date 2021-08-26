@@ -23,7 +23,6 @@
                 <ul class="navbar-nav">
                     @{
                         Usuario oUsuario;
-                        string nombre = "";
                         // Validar si vienen datos en la session
                         if (Session["User"] != null)
                         {
@@ -63,7 +62,7 @@
                                         Consultas
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <li>@Html.ActionLink("Reservaciones", "Index", "Hotel", null, new { @class = "dropdown-item" })</li>
+                                        <li>@Html.ActionLink("Reservaciones", "MostrarReservaciones", "Factura", null, new { @class = "dropdown-item" })</li>
                                     </ul>
                                 </li>
                             }

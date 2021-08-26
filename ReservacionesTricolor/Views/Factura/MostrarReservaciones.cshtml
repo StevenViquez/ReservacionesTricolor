@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ReservacionesTricolor.Factura>
+
+@{
+    ViewBag.Title = "Mostrar Reservaciones";
+}
+
+<h2>Mostrar todas las Reservaciones</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdFactura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.CheckIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.CheckOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.Habitacion.Hotel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.Habitacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IVA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFactura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservacion.CheckIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservacion.CheckOut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservacion.Habitacion.Hotel.NombreHotel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservacion.Habitacion.NombreHabitacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+        </tr>
+    }
+
+</table>
+
