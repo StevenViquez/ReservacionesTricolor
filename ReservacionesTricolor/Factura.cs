@@ -21,15 +21,15 @@ namespace ReservacionesTricolor
 
         [Required]
         [DisplayName("Subtotal")]
-        public int SubTotal { get; set; }
+        public decimal SubTotal { get; set; }
 
         [Required]
         [DisplayName("IVA")]
-        public System.DateTime IVA { get; set; }
+        public decimal IVA { get; set; }
 
         [Required]
         [DisplayName("Total")]
-        public System.DateTime Total { get; set; }
+        public decimal Total { get; set; }
 
         [Required]
         [DisplayName("Reservación")]

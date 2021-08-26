@@ -5,7 +5,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-sm-4">
+        <div id="habitacion_@item.IdHabitacion" class="col-sm-4">
             <div class="card" style="width: 10rem; height: 100%;">
                 <img src="https://www.cataloniahotels.com/es/blog/wp-content/uploads/2016/05/habitaci%C3%B3n-doble-catalonia-620x412.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -18,10 +18,60 @@
                         </ul>
                     </div>
                     <div style="bottom: 1%;position:absolute;">
-                        <button type="button" class="btn btn-danger" onclick="Habitaciones(@item.IdHotel)">Reservar</button>
+                        <button data-bs-dismiss="modal" data-nombre="@item.NombreHabitacion" onclick="Reservar(@item.IdHabitacion, @item.Precio, this.getAttribute('data-nombre'), @item.Capacidad)" type="button" class="btn btn-danger">Reservar</button>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
+
+<script>
+
+    function Reservar(id, precio, nombre, capacidad) { 
+        var reservas = document.getElementById('habitaciones_reservadas');
+        var checkin = document.getElementById("checkin").value;
+        var checkout = document.getElementById("checkout").value;
+        var subtotal = CalcularDias(checkin, checkout) * precio;
+        var boton_hoteles = document.getElementsByClassName('boton_hotel');
+
+        for (var i = 0; i < boton_hoteles.length; i++) {
+            boton_hoteles[i].disabled = true;
+        }
+
+        reservas.innerHTML += `       
+         <li data-id="${id}" data-capacidad=${capacidad} data-checkin="${checkin}" data-checkout="${checkout}" class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Habitación ${nombre}</div>
+                Desde ${checkin} hasta ${checkout} || Subtotal: ${subtotal}
+            </div>
+            <button onclick="EliminarReserva(${id})" type="button" class="btn-close" aria-label="Close"></button>
+         </li>`
+    }
+
+    function CalcularDias(checkin, checkout) {
+        //https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+        var date1 = new Date(checkin);
+        var date2 = new Date(checkout);
+        // To calculate the time difference of two dates
+        var Difference_In_Time = date2.getTime() - date1.getTime();
+        // To calculate the no. of days between two dates
+        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        return Difference_In_Days;
+    }
+
+    function EliminarReserva(id) {
+        var reservas = document.getElementById('habitaciones_reservadas');
+
+        for (var i = 0; i < reservas.children.length; i++) {
+            if (reservas.children[i].getAttribute('data-id') == id) {
+                reservas.children[i].remove();
+            }
+        }
+        var boton_hoteles = document.getElementsByClassName('boton_hotel');
+        for (var i = 0; i < boton_hoteles.length; i++) {
+            boton_hoteles[i].disabled = false;
+        }
+    }
+
+</script>

@@ -11,6 +11,7 @@ using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
+    [CustomAuthenticationFilter]
     public class HotelController : Controller
     {
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
@@ -18,7 +19,6 @@ namespace ReservacionesTricolor.Controllers
         // GET: Hotel
         public enum Roles { Administrador = 2 }
         [CustomAuthorize((int)Roles.Administrador)]
-        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
             var hotel = db.Hotel.Include(h => h.Canton).Include(h => h.Pais).Include(h => h.Provincia).Include(h => h.Usuario);
@@ -152,7 +152,19 @@ namespace ReservacionesTricolor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var habitaciones = db.Habitacion.Where(h => h.IdHotel == id).Include(h => h.Hotel);
+            var habitacionesReservadas = db.Reservacion
+                .Where(r => r.CheckIn <= checkout && r.CheckOut >= checkin);
+
+
+            var habitaciones = db.Habitacion.Where(h => h.IdHotel == id).Include(h => h.Hotel).ToList();
+
+            foreach (var item in habitacionesReservadas)
+            {
+               // var eliminar = ;
+                habitaciones.Remove(habitaciones.FirstOrDefault(x => x.IdHabitacion == item.IdHabitacion));
+            }
+
+
             if (habitaciones == null)
             {
                 return HttpNotFound();

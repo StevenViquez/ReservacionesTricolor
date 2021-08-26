@@ -7,17 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ReservacionesTricolor;
+using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
+    [CustomAuthenticationFilter]
     public class FacturaController : Controller
     {
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
 
         // GET: Factura
+        public enum Roles { Administrador = 2 , Usuario = 3}
+        [CustomAuthorize((int)Roles.Administrador,(int)Roles.Usuario)]
         public ActionResult Index()
         {
-            var factura = db.Factura.Include(f => f.Reservacion);
+            Usuario oUsuario = Session["User"] as Usuario;
+            var factura = db.Factura.Include(f => f.Reservacion.Habitacion.Hotel).Where(x => x.Reservacion.IdUsuario == oUsuario.IdUsuario);
             return View(factura.ToList());
         }
 

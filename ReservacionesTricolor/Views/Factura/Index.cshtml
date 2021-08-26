@@ -1,16 +1,29 @@
 ﻿@model IEnumerable<ReservacionesTricolor.Factura>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mis reservaciones";
 }
 
-<h2>Index</h2>
+<h2>Mis reservaciones</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdFactura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.CheckIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.CheckOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.Habitacion.Hotel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacion.Habitacion)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.SubTotal)
         </th>
@@ -20,32 +33,35 @@
         <th>
             @Html.DisplayNameFor(model => model.Total)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Reservacion.IdReservacion)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IVA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reservacion.IdReservacion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdFactura }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdFactura }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdFactura })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdFactura)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Reservacion.CheckIn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Reservacion.CheckOut)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Reservacion.Habitacion.Hotel.NombreHotel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Reservacion.Habitacion.NombreHabitacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SubTotal)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IVA)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total)
+    </td>
+</tr>
 }
 
 </table>

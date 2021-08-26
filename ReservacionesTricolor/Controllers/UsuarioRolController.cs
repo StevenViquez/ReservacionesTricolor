@@ -11,6 +11,7 @@ using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
+    [CustomAuthenticationFilter]
     public class UsuarioRolController : Controller
     {
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
@@ -18,7 +19,6 @@ namespace ReservacionesTricolor.Controllers
         // GET: UsuarioRol
         public enum Roles { Administrador = 2 }
         [CustomAuthorize((int)Roles.Administrador)]
-        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
             var usuarioRol = db.UsuarioRol.Include(u => u.Rol).Include(u => u.Usuario);

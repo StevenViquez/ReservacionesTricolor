@@ -36,7 +36,7 @@
                         </ul>
                     </div>
                     <div style="bottom: 1%;position:absolute;">
-                        <button type="button" class="btn btn-danger" onclick="Habitaciones(@item.IdHotel)" data-bs-toggle="modal" data-bs-target="#infoModal">Ver habitaciones</button>
+                        <button type="button" class="btn btn-danger boton_hotel" onclick="Habitaciones(@item.IdHotel)" data-bs-toggle="modal" data-bs-target="#infoModal">Ver habitaciones</button>
                     </div>
                 </div>
             </div>
@@ -45,18 +45,69 @@
 </div>
 
 
+<div style="margin-top:3%;">
+    <h1>Habitación reservada:</h1>
+
+    <div></div>
+    <ol id="habitaciones_reservadas" class="list-group list-group-numbered">
+    </ol>
+
+    <div style="margin-top:3%; display:none;" class="d-grid gap-2 col-6 mx-auto">
+        <button onclick="CompletarReservacion()" style="font-size:20px;" class="btn btn-success" type="button">Completar reservación</button>
+    </div>
+</div>
+
+
+
 <!-- Detail Modal -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div style="background-color:#97BBB5; color:white;" class="modal-header">
-                <h5 class="modal-title" id="infoModalLabel">Habitaciones disponibles</h5>
+                <h5 class="modal-title" id="infoModalLabel">Reservaciones Tricolor</h5>
             </div>
             <div class="modal-body" id="divInfo">
                 ...
             </div>
             <div class="modal-footer">
                 <button style="background-color:darkred; color:white;" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="confirmationModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#97BBB5; color:white;">
+                <h5 class="modal-title">Confirmación de reservación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Factura ID</th>
+                            <th scope="col">Habitación</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col">IVA</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th id="factura" scope="row">1</th>
+                            <td id="habitacion">Mark</td>
+                            <td id="subtotal">Otto</td>
+                            <td id="iva">test</td>
+                            <td id="total">test</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Realizar otra reservación</button>
+                <button type="button" onclick="RedireccionarAMisReservaciones()" class="btn btn-primary">Ver mis reservaciones</button>
             </div>
         </div>
     </div>
@@ -70,12 +121,68 @@
         var checkin = document.getElementById("checkin");
         var checkout = document.getElementById("checkout");
         if (!(checkin.value == "" || checkout.value == "")) {
-            console.log(checkin.value)
             $("#divInfo").load("/Hotel/_Habitaciones?id=" + id + "&&checkin=" + checkin.value + "&&checkout=" + checkout.value)
         } else {
             var divInfo = document.getElementById("divInfo");
             divInfo.innerHTML = "<h1>ERROR: debe seleccionar la fecha de alojamiento!!!</h1>";
         }
     }
+
+    function CompletarReservacion(id) {
+        var reservas = document.getElementById('habitaciones_reservadas');
+        if (reservas.children.length > 0) {
+            for (var i = 0; i < reservas.children.length; i++) {
+                var habitacion = {
+                    "CantidadPersonas": reservas.children[i].getAttribute('data-capacidad'),
+                    "CheckIn": reservas.children[i].getAttribute('data-checkin'),
+                    "CheckOut": reservas.children[i].getAttribute('data-checkout'),
+                    "IdHabitacion": reservas.children[i].getAttribute('data-id'),
+                };
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CompletarReserva", "Reservacion")',
+                traditional: true,
+                data: habitacion,
+                error: function (response) {
+                    console.log(response)
+                },
+                success: function (response) {
+                    if (response != null) {
+                        document.getElementById("factura").innerHTML = response.facturaId;
+                        document.getElementById("habitacion").innerHTML = response.nombreHabitacion;
+                        document.getElementById("subtotal").innerHTML = response.subtotal;
+                        document.getElementById("iva").innerHTML = response.iva;
+                        document.getElementById("total").innerHTML = response.total;
+                        var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'), {
+                            keyboard: false
+                        })
+                        myModal.show();
+                        document.getElementById('habitaciones_reservadas').innerHTML = ``;
+                        var boton_hoteles = document.getElementsByClassName('boton_hotel');
+
+                        for (var i = 0; i < boton_hoteles.length; i++) {
+                            boton_hoteles[i].disabled = false;
+                        }
+                    } else {
+                        var divInfo = document.getElementById("divInfo");
+                        divInfo.innerHTML = "<h1>ERROR: vuelva a realizar su reservación!!!</h1>";
+                    }
+                }
+            });
+
+        } else {
+            var divInfo = document.getElementById("divInfo");
+            divInfo.innerHTML = "<h1>ERROR: debe seleccionar una habitación!!!</h1>";
+        }
+
+    }
+
+    function RedireccionarAMisReservaciones() {
+        window.location.href = "/Factura/Index/"
+    }
+
+    
 
 </script>

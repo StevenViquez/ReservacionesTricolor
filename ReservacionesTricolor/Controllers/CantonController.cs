@@ -11,6 +11,7 @@ using ReservacionesTricolor.Security;
 
 namespace ReservacionesTricolor.Controllers
 {
+    [CustomAuthenticationFilter]
     public class CantonController : Controller
     {
         private ReservacionesTricolorEntities db = new ReservacionesTricolorEntities();
@@ -18,7 +19,6 @@ namespace ReservacionesTricolor.Controllers
         // GET: Canton
         public enum Roles { Administrador = 2 }
         [CustomAuthorize((int)Roles.Administrador)]
-        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
             var canton = db.Canton.Include(c => c.Pais).Include(c => c.Provincia);
